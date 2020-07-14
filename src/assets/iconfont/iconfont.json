@@ -1,0 +1,114 @@
+{
+  "id": "1907735",
+  "name": "musicer",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2154283",
+      "name": "单曲循环_32",
+      "font_class": "danquxunhuan",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "9974807",
+      "name": "随机",
+      "font_class": "suiji",
+      "unicode": "e71f",
+      "unicode_decimal": 59167
+    },
+    {
+      "icon_id": "14286635",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "8114843",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "9514109",
+      "name": "上一曲",
+      "font_class": "icon_gequxiangqing_s",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "10743563",
+      "name": "上一曲",
+      "font_class": "voiceleft",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "12397133",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "689319",
+      "name": "心",
+      "font_class": "xin",
+      "unicode": "e82a",
+      "unicode_decimal": 59434
+    },
+    {
+      "icon_id": "862787",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "3993148",
+      "name": "红心",
+      "font_class": "hongxin",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "4166162",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "6268292",
+      "name": "分享",
+      "font_class": "fenxiang",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "8949022",
+      "name": "返回",
+      "font_class": "fanhui",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "10047330",
+      "name": "更多",
+      "font_class": "ziyuan",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "11524168",
+      "name": "循环",
+      "font_class": "xunhuan",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    }
+  ]
+}
