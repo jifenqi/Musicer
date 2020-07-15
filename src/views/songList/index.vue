@@ -53,7 +53,7 @@
                     <ul v-else>无</ul>
                 </div>
                 <div class="description">
-                    <p v-for="(item,index) in creators.descriptions" :key="index">{{item}}</p>
+                    <p v-for="(item,index) in descriptions" :key="index">{{item}}</p>
                 </div>
                 <i @click='songInfo'></i>
             </div>
@@ -124,10 +124,10 @@ export default {
     },
     computed:{
         descriptions(){
-            if(this.creator.description == null){
+            if(this.creators.description == null){
                 return
             }else{
-                return this.creator.description.split('\n')
+                return this.creators.description.split('\n')
             }
         }
     }
