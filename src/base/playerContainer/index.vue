@@ -1,49 +1,55 @@
 <template>
     <div>
         <div class="player_container">
-                <div class="player_exterior" ref='wrapper'>
-                    <div class="exterior_img">
-                        <div :class="['exterior_cd', this.$parent.songstate?'playing':'']">
-                            <div :class="['song_img', this.$parent.songstate?'rotate':'']">
-                                <img v-lazy="song.picUrl" alt="">
-                            </div>
-                        </div>
-                        <div class="song_txt" ref='musicDoc'>
-							<div ref='musicdocs'>
-								<p 
-								ref='p'
-								v-for='(item,index) in lyric' 
-								:key='index'
-								:class="curIndex==index?'over':''"
-								>
-									<span>{{item.content}}</span>
-									<span>{{item.tr}}</span>
-								</p>
-							</div>
-                        </div>
-                    </div>
-                    <div class="song_operator">
-                        <span :class="like?'hot_like':'song_like'" @click='songLike'></span>
-                        <span class="song_down" @click='songDown'></span>
-                        <span class="song_message"></span>
-                        <span class="more"></span>
-                    </div>
-                </div>
-            </div>
+			<div class="player_exterior" ref='wrapper'>
+				<div class="exterior_img">
+					<div :class="['exterior_cd', this.$parent.songstate?'playing':'']">
+						<div :class="['song_img', this.$parent.songstate?'rotate':'']">
+							<img v-lazy="song.picUrl" alt="">
+						</div>
+					</div>
+					<div class="song_txt" ref='musicDoc'>
+						<div ref='musicdocs'>
+							<p 
+							ref='p'
+							v-for='(item,index) in lyric' 
+							:key='index'
+							:class="curIndex==index?'over':''"
+							>
+								<span>{{item.content}}</span>
+								<span>{{item.tr}}</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="song_operator">
+					<span :class="like?'hot_like':'song_like'" @click='songLike'></span>
+					<span class="song_down" @click='songDown'></span>
+					<span class="song_message" @click='songComment'></span>
+					<span class="more"></span>
+				</div>
+			</div>
+        </div>
+		<comment v-if='show' :song='song'></comment>
     </div>
 </template>
 <script>
 import BScroll from 'better-scroll'
+import comment from '@/base/comment'
 
 export default {
-    props:['currentTime','songDuration'],
+	props:['currentTime','songDuration'],
+	components:{
+		comment
+	},
     data(){
         return{
 		   scroll:null,
 		   musicdoc:null,
 		   curIndex:0,
 		   playing:true,
-		   songlike:[]
+		   songlike:[],
+		   show:false
         }
     },
 	watch:{
@@ -142,7 +148,9 @@ export default {
 				document.body.removeChild(a)
 				window.URL.revokeObjectURL(url);
 			});
-
+		},
+		songComment(){
+			this.show = true;
 		}
 	},
 	computed:{
