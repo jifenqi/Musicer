@@ -39,7 +39,7 @@
         <mini-player :progress='progress' v-show="!this.$store.state.show && songList.length"></mini-player>
         <transition name="minilist">
             <div class="minilist" v-if='show' @click='miniListShow'>
-                <min-list></min-list>
+                <min-list :index='index'></min-list>
             </div>
         </transition>
     </div>
@@ -51,8 +51,6 @@ import minList from '@/base/miniList'
 import progressBar from '@/base/progressBar'
 
 let i = 0;
-let flag = true;
-
 export default {
     name:"songplayer",
     components:{
@@ -68,7 +66,8 @@ export default {
             progress:'',
             songstate:false,
             show:false,
-            model:'player_model'
+            model:'player_model',
+            index:0,
         }
     },
     watch:{
@@ -80,13 +79,11 @@ export default {
             }
         },
         song(newVal){
+            this.index = this.songList.findIndex((item)=>item.id == newVal.id)
             this.$root.songid = newVal.id;
             if(newVal.songurl === 'Null'){
                 this.error(newVal.name)
             }
-        },
-        songList(){
-            flag =true
         }
     },
     methods:{
@@ -305,7 +302,7 @@ export default {
     width: 100%;
     height: 100vh;
     z-index:999;
-    padding-top:48vh;
+    padding-top:calc(100vh - 300px);
 }
 .minilist-enter-active,.minilist-leave-active{
     transition:0.6s;

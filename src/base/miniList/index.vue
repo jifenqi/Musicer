@@ -5,7 +5,7 @@
             <i @click='$parent.show = false'></i>
             <div ref='songList' class="songList">
                 <ul ref='ul'>
-                    <li v-for='(item) in songList' :key="item.id" :class="item.songurl == 'Null'?'none':''">
+                    <li ref='li' v-for='(item) in songList' :key="item.id" :class="item.songurl == 'Null'?'none':''">
                         <div>
                             <p>{{item.name}}</p>
                             <p>{{item.athor}}</p>
@@ -20,13 +20,11 @@
 <script>
 import BScroll from 'better-scroll'
 
-let flag = false
 export default {
+    props:['index'],
     data(){
         return{
-            songIndex:0,
-            scroll:null,
-            index:this.$root.index
+            scroll:null
         }
     },
     mounted(){
@@ -34,6 +32,7 @@ export default {
             scrollY:true,
             click:true
         })
+        this.scroll.scrollToElement(this.$refs.li[this.index],1000)
     },
     methods:{
         goSong(song){

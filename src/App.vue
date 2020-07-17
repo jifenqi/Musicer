@@ -2,7 +2,7 @@
   <div id="app">
     <header-link></header-link>
     <tab></tab>
-    <div class="content">
+    <div class="content" :style="{'padding-bottom':!$store.state.show&&songList.length?'50px':'0px'}">
       <keep-alive>
         <router-view />
       </keep-alive>
@@ -20,12 +20,22 @@ export default {
     HeaderLink,
     Tab,
     songPlayer,
+  },
+  computed:{
+    songList(){
+      return this.$store.state.songList
+    }
   }
 };
 </script>
 <style>
 @import url('./assets/iconfont/iconfont.css');
 @import url('./assets/CSS/reset.css');
+#app{
+  width: 100vw;
+  height: 100vh;
+}
+
 .content {
   height: calc(100vh - 124px);
   overflow-y: auto;

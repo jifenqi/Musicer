@@ -16,16 +16,21 @@
                 <music-list class="remd_newsg" :search_list='newSong'></music-list>
             </div>
         </div>
+        <div v-if='!newSong.length'>
+            <loading></loading>
+        </div>
         <router-view></router-view>
     </div>
 </template>
 <script>
 import musicList from '@/base/musicList'
+import loading from '@/base/loading'
 
 export default {
     name:"recommend",
     components:{
-        musicList
+        musicList,
+        loading
     },
     data(){
         return{

@@ -185,7 +185,7 @@ export default {
 .player_exterior .exterior_cd{
 	height: 100%;
 	position: relative;
-	padding-top:14vh;
+	padding-top:75px;
 	overflow:hidden;
 }
 .player_exterior .exterior_cd::after{

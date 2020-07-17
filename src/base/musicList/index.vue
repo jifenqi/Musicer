@@ -22,20 +22,13 @@
         </div>
       </li>
     </ul>
-    <div v-if='!search_list.length'>
-      <loading></loading>
-    </div>
   </div>
 </template>
 <script>
-import loading from '@/base/loading'
 import {author, songName, newList} from '@/module/formate.js'
 
 export default {
   props: ["search_list"],
-  components:{
-    loading
-  },
   methods: {
     songURL(song) {
       this.$store.dispatch("songList",{

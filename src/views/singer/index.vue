@@ -1,36 +1,37 @@
 <template>
-    <div>
+    <div id='singer'>
         <div class="singer_all">
-            <div class="wrapper" ref='singer'>
-                <div>
-                    <div class="singerContent">
-                        <div class="singer" ref='listGroup' v-for="(items) in singerList" :key='items.title'>
-                            <dl>
-                                <dt class='singer_label'>{{items.title}}</dt>
-                                <dd class="singer_data">
-                                    <div class="singer_con" v-for='(item,index) in items.items' :key='index' @click="singerInfo(item.id)">
-                                        <div class="singer_img"><img v-lazy="item.picUrl" alt=""></div>
-                                        <div class="singer_name">{{item.name}}</div>
-                                    </div>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
+            <div class='btscroll' ref='singer'>
+                <div class="singerContent">
+                    <dl class="singer" ref='listGroup' v-for="(items) in singerList" :key='items.title'>
+                        <dt class='singer_label'>{{items.title}}</dt>
+                        <dd class="singer_data">
+                            <div class="singer_con" v-for='(item,index) in items.items' :key='index' @click="singerInfo(item.id)">
+                                <div class="singer_img"><img v-lazy="item.picUrl" alt=""></div>
+                                <div class="singer_name">{{item.name}}</div>
+                            </div>
+                        </dd>
+                    </dl>
                 </div>
             </div>
             <div class="singer_title" v-show='label && bol' v-text='label'></div>
-            <div class="singer_aside">
+            <div class="singer_aside"
+                @touchmove.prevent='touchmove'
+                @touchend='touchend'
+            >
                 <ul>
                     <li 
                     :class='index == currentIndex?"active":""' 
                     v-for='(item,index) in shortcutList' 
                     :key='index'
                     @click='scrollTo(index)'
+                    ref='li'
                     >
                     {{item}}
                 </li>
                 </ul>
             </div>
+            <div class="text" v-if='textShow'>{{textShow}}</div>
             <div v-if='!singerList.length'>
                 <loading></loading>
             </div>
@@ -44,6 +45,7 @@ import Py from '@/module/py.js'
 import BScroll from 'better-scroll'
 
 const HEIGHT = 30
+let timer=null;
 export default {
     name:'singer',
     components:{
@@ -55,7 +57,8 @@ export default {
             currentIndex:0,
             label:'',
             bol:true,
-            singer:null
+            singer:null,
+            textShow:''
         }
     },
     async created(){
@@ -121,6 +124,28 @@ export default {
                     this.label = this.singerList[index].title
                 }
             })
+        },
+        touchmove(e){
+            let y = e.touches[0].pageY
+            this.s(y)
+            return false;
+        },
+        touchend(){
+            clearTimeout(timer)
+            this.textShow=''
+            this.scrollTo(this.currentIndex)
+            return false;
+        },
+        s(y){
+            this.Indicator.forEach((item,index)=>{
+                if(y>item && y<this.Indicator[index+1]){
+                    this.currentIndex = index
+                    this.textShow = this.$refs.li[index].innerHTML
+                }else if(y>=item){
+                    this.currentIndex = index,
+                    this.textShow = this.$refs.li[index].innerHTML
+                }
+            })
         }
     },
     computed:{
@@ -136,15 +161,46 @@ export default {
             })
             return arr
         },
+        Indicator(){
+            let arr=[];
+            this.$refs.li.map(item=>{
+                arr.push(item.getBoundingClientRect().top)
+            })
+            return arr
+        }
     }
 }
 </script>
 <style scoped>
+#singer{
+    width: 100%;
+    height: 100%;
+}
 .singer_all{
     width: 100%;
-    height: calc(100vh - 124px);
+    height: 100%;
     position: relative;
     overflow:hidden;
+}
+.singer_all .btscroll{
+    width: 100%;
+    height: 100%;
+}
+.singer_all .text{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform:translate(-50%,-50%);
+   width: 80px;
+   height: 80px;
+   background:#ccc;
+   color:white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size:50px;
+   border-radius:10px;
+   opacity: 0.6;
 }
 .wrapper{
    width: 100%;
@@ -155,13 +211,13 @@ export default {
 }
 .singer_aside{
     position: absolute;
-    right: 5px;
-    top:0;
-    width: 20px;
+    right: 0px;
+    top:50%;
+    width: 40px;
     height: 430px;
-    background:#00000045;
-    border-radius:20px;
-    transform:scale(0.8)
+    padding:0 10px;
+    transform-origin:center right;
+    transform: translateY(-50%) scale(0.8);
 }
 .singer_aside ul{
     width: 100%;
@@ -169,6 +225,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background:#00000045;
+    border-radius:20px;
 }
 .singer_aside ul li{
     color:white;

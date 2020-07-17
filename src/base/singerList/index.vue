@@ -151,6 +151,7 @@ export default {
     padding:0 10px;
     border-radius:10px;
     margin-left:5px;
+    vertical-align: middle;
 }
 .singer_deep{
     display: flex;
